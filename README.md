@@ -23,7 +23,7 @@ The implementation is based on MySQL. However, the query interface can be easily
 
 You need to install MySQL and necessary python packages (```pip install -r requirements.txt```). Then, you need to modify ```spec.json``` based on your analytical tasks.
 
-```json
+```
 {
     "hostname": "localhost", // MySQL hostname
     "username": "root", // MySQL username
