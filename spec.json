@@ -1,0 +1,22 @@
+{
+    "hostname": "localhost",
+    "username": "root", 
+    "passwd": "123456",
+    "database": "icube",
+    "table": "so2",
+    "measure":"SUM(SO2__KT_)",
+    "subspaces": [
+        {
+            "PRODUCER_TYPE": "Electric Utility", 
+            "ENERGY_SOURCE": "Coal", 
+            "YEAR": "1992"
+        },
+        {
+            "PRODUCER_TYPE": "Electric Utility", 
+            "ENERGY_SOURCE": "Coal", 
+            "YEAR": "1993"
+        }
+    ],
+    "threshold": 0.1,
+    "topk": 10
+}
