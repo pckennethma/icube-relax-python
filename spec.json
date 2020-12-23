@@ -17,6 +17,16 @@
             "YEAR": "1993"
         }
     ],
-    "threshold": 0.1,
+    "auto_cube_batch": {
+        "PRODUCER_TYPE": "ALL", 
+        "ENERGY_SOURCE": "ALL"
+    },
+    "auto_target_col": "YEAR",
+    "auto_target_batch_type": "int-inc",
+    "auto_target_pair": [
+
+    ],
+    "remark": "auto_* are only used for auto relax.",
+    "threshold": 1,
     "topk": 10
 }

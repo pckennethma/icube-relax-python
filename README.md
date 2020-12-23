@@ -43,6 +43,15 @@ You need to install MySQL and necessary python packages (```pip install -r requi
             "YEAR": "1993"
         }
     ],
+    "auto_cube_batch": {
+        "PRODUCER_TYPE": "ALL", // Run RELAX on ALL possible value of "PRODUCER_TYPE"
+        "ENERGY_SOURCE": ["Coal", "Petroleum"] // Run RELAX only on the cell where "PRODUCER_TYPE" is within "Coal" and "Petroleum"
+    },
+    "auto_target_col": "YEAR", // make comparison on "YEAR"
+    "auto_target_batch_type": "int-inc", // construct comparison pair incrementally, e.g., (1990, 1991), (1991, 1992), ..., (2014, 2015)
+    "auto_target_pair": [
+
+    ], // manually specify interesting comparison pairs
     "threshold": 0.1, // threshold for generalization
     "topk": 10 // maximal allowed output results
 }
@@ -50,17 +59,9 @@ You need to install MySQL and necessary python packages (```pip install -r requi
 
 Run ```python relax.py``` and it will output a list of common subspaces. For example,
 
-```
-For every ENERGY_SOURCE where PRODUCER_TYPE: Electric Utility,  the relationship of value under YEAR: [1992, 1993] looks similar.
-Besides, we also found the following individual entries looks similar.
-{'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Petroleum'}
-{'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Coal'}
-{'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Natural Gas'}
-{'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Other'}
-{'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Geothermal'}
-{'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Other Biomass'}
-{'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Wood and Wood Derived Fuels'}
-{'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Other Gases'}
-{'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': '*'}
-{'PRODUCER_TYPE': 'Utility Sector Cogen', 'ENERGY_SOURCE': 'Petroleum'}
-```
+![plot](./fig/relax.jpg)
+
+
+Run ```python auto-relax.py``` and it will output a list of common high-level subspaces on multiple comparison pairs (note that single common cell will not be listed in ```auto``` mode). For example,
+
+![plot](./fig/auto.jpg)
