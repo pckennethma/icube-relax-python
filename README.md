@@ -51,7 +51,7 @@ You need to install MySQL and necessary python packages (```pip install -r requi
 Run ```python relax.py``` and it will output a list of common subspaces. For example,
 
 ```
-For every ENERGY_SOURCE where PRODUCER_TYPE: Electric Utility,  the relationship value under YEAR: [1992, 1993] looks similar.
+For every ENERGY_SOURCE where PRODUCER_TYPE: Electric Utility,  the relationship of value under YEAR: [1992, 1993] looks similar.
 Besides, we also found the following individual entries looks similar.
 {'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Petroleum'}
 {'PRODUCER_TYPE': 'Industrial Cogen', 'ENERGY_SOURCE': 'Coal'}
