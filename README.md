@@ -53,7 +53,9 @@ You need to install MySQL and necessary python packages (```pip install -r requi
 
     ], // manually specify interesting comparison pairs
     "threshold": 0.1, // threshold for generalization
-    "topk": 10 // maximal allowed output results
+    "topk": 10, // maximal allowed output results
+    "max_exception": 1 // maximal allowed exceptions in each commonness
+
 }
 ```
 

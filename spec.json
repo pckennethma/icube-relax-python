@@ -19,7 +19,7 @@
     ],
     "auto_cube_batch": {
         "PRODUCER_TYPE": "ALL", 
-        "ENERGY_SOURCE": "ALL"
+        "ENERGY_SOURCE": ["Coal"]
     },
     "auto_target_col": "YEAR",
     "auto_target_batch_type": "int-inc",
@@ -27,6 +27,7 @@
 
     ],
     "remark": "auto_* are only used for auto relax.",
-    "threshold": 1,
-    "topk": 10
+    "threshold": 0.1,
+    "topk": 100,
+    "max_exception": 1
 }

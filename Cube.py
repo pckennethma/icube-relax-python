@@ -38,7 +38,22 @@ class Cube:
                     break
             if flag: merge_result.append(col)
         return merge_result
-    
+
+    def bottom_up_level1_auto_merge_with_exception(self, common_subspace, max_exception):
+        merge_result = []
+        for col in common_subspace:
+            exceptions = []
+            for val in self.sibling_subspace[col]:
+                query_subspace = copy(common_subspace)
+                query_subspace[col] = val
+                _, is_common = self.get_val(query_subspace)
+                if not is_common:
+                    exceptions.append(query_subspace)
+                    if len(exceptions) > max_exception: 
+                        break
+            if len(exceptions) <= max_exception: merge_result.append((col, exceptions))
+        return merge_result
+
     def bottom_up_level2_auto_merge(self, common_subspace):
         level1_merge_result = self.bottom_up_level1_auto_merge(common_subspace)
         merge_result = []
@@ -63,6 +78,36 @@ class Cube:
                     level1_merge_result.remove(col2)
                     merge_result.append((col1, col2))
         return merge_result + level1_merge_result
+
+    def bottom_up_level2_auto_merge_with_exception(self, common_subspace, max_exception):
+        level1_merge_result = self.bottom_up_level1_auto_merge_with_exception(common_subspace, max_exception)
+        level1_merge_result_dict = {i[0]:i[1] for i in level1_merge_result}
+        merge_result = []
+        for col1 in common_subspace:
+            if col1 not in level1_merge_result_dict: continue
+            col1_exception = level1_merge_result_dict[col1]
+            for col2 in common_subspace:
+                if col1 == col2: continue
+                if col2 not in level1_merge_result_dict: continue
+                col2_exception = level1_merge_result_dict[col2]
+                if len(col1_exception) + len(col2_exception) > max_exception: continue
+                exceptions = []
+                for val1 in self.sibling_subspace[col1]:
+                    for val2 in self.sibling_subspace[col2]:
+                        query_subspace = copy(common_subspace)
+                        query_subspace[col1] = val1
+                        query_subspace[col2] = val2
+                        _, is_common = self.get_val(query_subspace)
+                        if not is_common:
+                            exceptions.append(query_subspace)
+                            if len(exceptions) > max_exception: 
+                                break
+                if len(exceptions) <= max_exception: 
+                    del level1_merge_result_dict[col1]
+                    del level1_merge_result_dict[col2]
+                    merge_result.append(((col1, col2), exceptions))
+        return merge_result + [(k,v) for k,v in level1_merge_result_dict.items()]
+
     def is_subsumed(self, subspace, ref_subspace, merge_result):
         for k,v in subspace.items():
             if k in merge_result: continue
